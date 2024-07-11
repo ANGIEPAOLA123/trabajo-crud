@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="contenedor_principal">
+        <form>
+            
+            <label for="nombres">Nombres</label>
+            <input ype="text" id="nombres" autocomplete="off" placeholder="Ingresa tus nombres">
+            
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" autocomplete="off" placeholder="Ingresa tus apellidos">
+            
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" autocomplete="off" placeholder="Ingresa tu telefono">
+            
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" autocomplete="off" placeholder="Ingresa tu dirreccion">
+            
+            <label for="tipodocumento">Tipo de documento</label>
+            <select id="tipodocumento"> 
+                <option value="">Selecionar...</option>
+                <option value="">Cédula de ciudadanía</option>
+                <option value="">Tarjeta de identidad</option>
+            </select>
+          
+            <label for="documento">Numero de documento</label>
+            <input type="text" id="documento" autocomplete="off" placeholder="Ingresa numero de documento">
+
+           <input type="checkbox"> 
+           <label for="politicas">acepta las politicas de uso</label>
+        
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script src="formulario.js"></script> 
+</body>
+</html>
