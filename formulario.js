@@ -5,53 +5,111 @@ const telefono = document.querySelector("#telefono");
 const direccion = document.querySelector("#direccion");
 const tipodocumento = document.querySelector("#tipodocumento");
 const documento = document.querySelector("#documento");
+const politicas = document.querySelector("#politicas");
+const enviar = document.querySelector("#enviar");
 
+// Expresiones regulares para validar cada campo
+const ValidarNombre = /^[a-zA-Z]{4,}$/;
+const ValidarDireccion = /^[a-zA-Z0-9\s,.'-]{3,}$/;
+const ValidarNumero = /^[0-9]{10}$/;  // Exactamente 10 dígitos
+const ValidarDocumento = /^[0-9]{8,10}$/;  // Entre 8 y 10 dígitos
+
+// Función para remover clase de error y agregar clase de correcto
+const remover = (input, validacion) => {
+    if (validacion.test(input.value)) {
+        input.classList.add("correcto");
+        input.classList.remove("error");
+    } else {
+        input.classList.remove("correcto");
+        input.classList.add("error");
+    }
+};
+
+// Validar el formulario al enviarlo
 const validar = (event) => {
-    event.preventDefault()
-    // console.log(nombres.value);
-    if(nombres.value === ""){
+    event.preventDefault();
+    let valid = true;
+
+    if (nombres.value === "") {
         alert("El campo Nombres es obligatorio");
         nombres.focus();
-        nombres.classList.add("error") // agregando una clase 
+        nombres.classList.add("error");
+        valid = false;
     }
-    if(apellidos.value === ""){
+
+    if (apellidos.value === "") {
         alert("El campo Apellidos es obligatorio");
         apellidos.focus();
-        apellidos.classList.add("error") // agregando una clase 
+        apellidos.classList.add("error");
+        valid = false;
     }
-    if(telefono.value === ""){
-        alert("El campo Telefono es obligatorio");
+
+    if (telefono.value === "") {
+        alert("El campo Teléfono es obligatorio");
         telefono.focus();
-        telefono.classList.add("error") // agregando una clase 
+        telefono.classList.add("error");
+        valid = false;
     }
-    if(direccion.value === ""){
-        alert("El campo Direccion es obligatorio");
+
+    if (direccion.value === "") {
+        alert("El campo Dirección es obligatorio");
         direccion.focus();
-        direccion.classList.add("error") // agregando una clase 
+        direccion.classList.add("error");
+        valid = false;
     }
-    if(documento.value === ""){
+
+    if (documento.value === "") {
         alert("El campo Documento es obligatorio");
         documento.focus();
-        documento.classList.add("error") // agregando una clase 
+        documento.classList.add("error");
+        valid = false;
     }
-    if(tipodocumento.value === ""){
-        alert("El campo Documento es obligatorio");
+
+    if (tipodocumento.value === "0") {
+        alert("El campo Tipo de Documento es obligatorio");
         tipodocumento.focus();
-        tipodocumento.classList.add("error") // agregando una clase 
+        tipodocumento.classList.add("error");
+        valid = false;
     }
-}
-const remover =(e,input) =>{
-    if (input.value !="")
-    input.classList.remover("error");
-    input.classList.ad("correcto")
-    
 
-}
+    return valid;
+};
+
+// Remover clase de error al perder el foco (blur) o al escribir (keyup)
+nombres.addEventListener("blur", () => remover(nombres, ValidarNombre));
+nombres.addEventListener("keyup", () => remover(nombres, ValidarNombre));
+
+apellidos.addEventListener("blur", () => remover(apellidos, ValidarNombre));
+apellidos.addEventListener("keyup", () => remover(apellidos, ValidarNombre));
+
+direccion.addEventListener("blur", () => remover(direccion, ValidarDireccion));
+direccion.addEventListener("keyup", () => remover(direccion, ValidarDireccion));
+
+telefono.addEventListener("blur", () => remover(telefono, ValidarNumero));
+telefono.addEventListener("keyup", () => remover(telefono, ValidarNumero));
+
+documento.addEventListener("blur", () => remover(documento, ValidarDocumento));
+documento.addEventListener("keyup", () => remover(documento, ValidarDocumento));
+
+// Validar tipo de documento al cambiar
+tipodocumento.addEventListener("change", () => {
+    if (tipodocumento.value !== "0") {
+        tipodocumento.classList.remove("error");
+        tipodocumento.classList.add("correcto");
+    } else {
+        tipodocumento.classList.remove("correcto");
+        tipodocumento.classList.add("error");
+    }
+});
+
+// Habilitar/deshabilitar el botón de enviar según las políticas
+politicas.addEventListener("change", () => {
+    if (politicas.checked) {
+        enviar.removeAttribute("disabled");
+    } else {
+        enviar.setAttribute("disabled", "");
+    }
+});
+
+// Agregar evento de submit al formulario
 $formulario.addEventListener("submit", validar);
-
-nombres.addEventListener("blur",(event) => (
-    remover (event,nombres)
-))
-apellidos.addEventListener("blur",(event) => (
-    remover (event,apellidos )
-))
