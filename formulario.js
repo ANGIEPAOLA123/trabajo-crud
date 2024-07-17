@@ -105,11 +105,43 @@ tipodocumento.addEventListener("change", () => {
 // Habilitar/deshabilitar el botón de enviar según las políticas
 politicas.addEventListener("change", () => {
     if (politicas.checked) {
-        enviar.removeAttribute("disabled");
+        boton.removeAttribute("disabled");
     } else {
-        enviar.setAttribute("disabled", "");
+        boton.setAttribute("disabled", "disabled");
     }
 });
 
 // Agregar evento de submit al formulario
 $formulario.addEventListener("submit", validar);
+const solonumeros = function(event) {
+    if(event.keyCode < 48 || event.keyCode > 57) 
+    event.preventDefault();
+};
+
+const sololetras = (event, elemento) => {
+    // console.log(elemento.value);
+    let Letras = /^[a-zA-Z]+$/;
+    if (Letras.test(elemento.value)) {
+        console.log("si")
+    } else {
+        console.log("no")
+        event.preventDefault();
+    }
+    // if(event.keyCode < 97 || event.keyCode > 122) 
+    // event.preventDefault();
+};
+
+documento.addEventListener("keypress", solonumeros);
+telefono.addEventListener("keypress", solonumeros);
+nombres.addEventListener("keypress", (event) => {
+    sololetras(event, nombres);
+});
+apellidos.addEventListener("keypress", sololetras);
+
+
+
+
+
+
+
+

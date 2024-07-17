@@ -10,19 +10,14 @@
     
     <div class="contenedor_principal">
         <form>
-            
             <label for="nombres">Nombres</label>
             <input ype="text" id="nombres" autocomplete="off" placeholder="Ingresa tus nombres">
-            
             <label for="apellidos">Apellidos</label>
             <input type="text" id="apellidos" autocomplete="off" placeholder="Ingresa tus apellidos">
-            
             <label for="telefono">Teléfono</label>
             <input type="tel" id="telefono" autocomplete="off" placeholder="Ingresa tu telefono">
-            
             <label for="direccion">Dirección</label>
             <input type="text" id="direccion" autocomplete="off" placeholder="Ingresa tu dirreccion">
-            
             <label for="tipodocumento">Tipo de documento</label>
             <select id="tipodocumento"> 
                 <option value="">Selecionar...</option>
@@ -32,12 +27,13 @@
           
             <label for="documento">Numero de documento</label>
             <input type="text" id="documento" autocomplete="off" placeholder="Ingresa numero de documento">
-
-           <input type="checkbox"> 
-           <label for="politicas">acepta las politicas de uso</label>
-        
-            
-            <button type="submit">Enviar</button>
+            <label for="email">email</label>
+            <input type="text" id="email" autocomplete="off" placeholder="Ingresa numero de documento">
+            <div class="button__checkbox">
+                <input type="checkbox" id="politicas">
+                <label for="politicas">Acepta las politicas de uso</label>
+            </div>
+            <button id="boton"type="submit">enviar</button>
         </form>
     </div>
     <script src="formulario.js"></script> 
