@@ -1,72 +1,38 @@
-import isEmail from "./modulo.js";
+import correoelectronico from "../formulario/modulos/modulo.js";
+import { sololetras } from "../formulario/modulos/modulos_letras.js";
+import { solonumeros } from "../formulario/modulos/modulos_numeros.js";
+import {  validar, remover } from "../formulario/modulos/modulo_validacion.js"
 
+// Selecciona el primer formulario (<form>) en el documento HTML. Lo asigna a la variable $formulario
 const $formulario = document.querySelector("form");
+
+// Selecciona los elementos del formulario por su ID. Cada uno se asigna a una variable
 const nombres = document.querySelector("#nombres");
 const apellidos = document.querySelector("#apellidos");
 const telefono = document.querySelector("#telefono");
 const direccion = document.querySelector("#direccion");
 const tipodocumento = document.querySelector("#tipodocumento");
 const documento = document.querySelector("#documento");
-const email = document.querySelector("#Email");
+const correo = document.querySelector("#correo");
 const politicas = document.querySelector("#politicas");
-const enviar = document.querySelector("#enviar");
+const boton = document.querySelector("#boton");
 
-// Validar el formulario al enviarlo
-const validar = (event) => {
-    event.preventDefault();
-    if (nombres.value === "") {
-        nombres.focus();
-        nombres.classList.add("error");
-    }
+//  Se añade un listener al formulario que llama a la función validar cuando se intenta enviar el formulario.
+$formulario.addEventListener("submit", validar);
 
-    if (apellidos.value === "") {
-        apellidos.focus();
-        apellidos.classList.add("error");
-    }
+// keydown -- cuando ecribo tecla por tecla
+// keypress -- cuando la presiono
+// keyup -- cuando la oprimo
 
-    if (telefono.value === "") {
-        telefono.focus();
-        telefono.classList.add("error");
-    }
+// Se añade un listener para el evento keyup en cada uno de los campos. Cuando se suelta una tecla, se llama a la función remover para verificar el estado del campo.
+[nombres, apellidos, correo, telefono, direccion, documento].forEach(input => {
+    input.addEventListener("keyup", () => {
+        remover(input);
+    });
+});
 
-    if (direccion.value === "") {
-        direccion.focus();
-        direccion.classList.add("error");
- 
-    }
-
-    if (documento.value === "") {
-        documento.focus();
-        documento.classList.add("error");
-    }
-
-    if (tipodocumento.value === "0") {
-        tipodocumento.focus();
-        tipodocumento.classList.add("error");
-    }
-    if(email.value === ""){
-        email.focus();
-        email.classList.add("error");
-    }
-};
-const remover = (e, input) => {}
-// Remover clase de error al perder el foco (blur) o al escribir (keyup)
-nombres.addEventListener("blur", () => remover(nombres, ValidarNombre));
-nombres.addEventListener("keyup", () => remover(nombres, ValidarNombre));
-
-apellidos.addEventListener("blur", () => remover(apellidos, ValidarNombre));
-apellidos.addEventListener("keyup", () => remover(apellidos, ValidarNombre));
-
-direccion.addEventListener("blur", () => remover(direccion, ValidarDireccion));
-direccion.addEventListener("keyup", () => remover(direccion, ValidarDireccion));
-
-telefono.addEventListener("blur", () => remover(telefono, ValidarNumero));
-telefono.addEventListener("keyup", () => remover(telefono, ValidarNumero));
-
-documento.addEventListener("blur", () => remover(documento, ValidarDocumento));
-documento.addEventListener("keyup", () => remover(documento, ValidarDocumento));
-
-// Validar tipo de documento al cambiar
+// Manejar el cambio en el tipo de documento
+// Al cambiar el valor del tipo de documento, se verifica si es diferente de "0". Se actualiza el estado visual del campo según corresponda.
 tipodocumento.addEventListener("change", () => {
     if (tipodocumento.value !== "0") {
         tipodocumento.classList.remove("error");
@@ -77,50 +43,40 @@ tipodocumento.addEventListener("change", () => {
     }
 });
 
-// Habilitar/deshabilitar el botón de enviar según las políticas
-addEventListener("DOMContentLoaded",(event)=>{
-    if(!politicas.checked){
+// Manejar el estado del botón de enviar según el checkbox
+addEventListener("DOMContentLoaded", (event) => {
+    if(!politicas.checked) {
         console.log(boton);
-        boton.setAttribute("disabled","")
+        boton.setAttribute("disabled", "");
     }
-})
-politicas.addEventListener("change",function(e){
-    console.log(e.target.checked);
-    if(e.target.checked){
-        boton.removeAttribute("disalbed")
+});
+
+politicas.addEventListener("change", function (e) {
+    if (e.target.checked) {
+        boton.removeAttribute("disabled");
     }
-})
+});
 
-// Agregar evento de submit al formulario
-$formulario.addEventListener("submit", validar);
-const solonumeros = function(event) {
-    if(event.keyCode < 48 || event.keyCode > 57) 
-    event.preventDefault();
-};
 
-const sololetras = (event, elemento) => {
-    // console.log(elemento.value);
-    let Letras = /^[a-zA-Z]+$/;
-    if (Letras.test(elemento.value)) {
-        console.log("si")
-    } else {
-        console.log("no")
-        event.preventDefault();
-    }
-    // if(event.keyCode < 97 || event.keyCode > 122) 
-    // event.preventDefault();
-};
+// Validaciones específicas
 
+// Validación del documento
 documento.addEventListener("keypress", solonumeros);
+
+// Validación del telefono
 telefono.addEventListener("keypress", solonumeros);
-apellidos.addEventListener("keypress", sololetras);
 
+// Validación del nombre
+nombres.addEventListener("keypress", (event) => {
+    sololetras(event, nombres);
+});
 
+// Validación del apellido
+apellidos.addEventListener("keypress", (event) => {
+    sololetras(event, apellidos);
+});
 
-
-
-
-
-
-
-
+// Validación del correo electrónico
+correo.addEventListener("blur", (event) => {
+    correoelectronico(event, correo);
+});
