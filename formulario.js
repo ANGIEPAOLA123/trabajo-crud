@@ -1,4 +1,4 @@
-import correoelectronico from "../formulario/modulos/modulo.js";
+import correoelectronico from "../formulario/modulos/modulo correo.js";
 import { sololetras } from "../formulario/modulos/modulos_letras.js";
 import { solonumeros } from "../formulario/modulos/modulos_numeros.js";
 import {  validar, remover } from "../formulario/modulos/modulo_validacion.js"
@@ -57,26 +57,30 @@ politicas.addEventListener("change", function (e) {
     }
 });
 
+const validar = (event) =>{
+    event.preventDefault
+}
 
-// Validaciones específicas
 
-// Validación del documento
-documento.addEventListener("keypress", solonumeros);
+// // Validaciones específicas
 
-// Validación del telefono
-telefono.addEventListener("keypress", solonumeros);
+// // Validación del documento
+// documento.addEventListener("keypress", solonumeros);
 
-// Validación del nombre
-nombres.addEventListener("keypress", (event) => {
-    sololetras(event, nombres);
-});
+// // Validación del telefono
+// telefono.addEventListener("keypress", solonumeros);
 
-// Validación del apellido
-apellidos.addEventListener("keypress", (event) => {
-    sololetras(event, apellidos);
-});
+// // Validación del nombre
+// nombres.addEventListener("keypress", (event) => {
+//     sololetras(event, nombres);
+// });
 
-// Validación del correo electrónico
-correo.addEventListener("blur", (event) => {
-    correoelectronico(event, correo);
-});
+// // Validación del apellido
+// apellidos.addEventListener("keypress", (event) => {
+//     sololetras(event, apellidos);
+// });
+
+// // Validación del correo electrónico
+// correo.addEventListener("blur", (event) => {
+//     correoelectronico(event, correo);
+// });

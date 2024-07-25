@@ -17,14 +17,3 @@ const correoelectronico = (event, elemento) => {
 export default correoelectronico;
 
 
-// Función que agrega o quita la clase correcto dependiendo de si el campo tiene un valor
-export const remover = (input) => {
-    if (input.value !== "") {
-        input.classList.add("correcto"); // Añade la clase correcto
-        input.classList.remove("error"); // Quita la clase error
-        document.querySelector(`#${input.id}-error`).textContent = ""; // Limpia el mensaje de error
-    } else {
-        input.classList.remove("correcto");
-        input.classList.add("error");
-    }
-};
