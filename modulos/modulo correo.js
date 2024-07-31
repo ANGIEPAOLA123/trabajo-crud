@@ -1,4 +1,3 @@
-
 const correoelectronico = (event, elemento) => {
     let validarcorreo = /^[\w-._+]+@[\w-._+]+(\.[a-zA-Z]{2,4}){1,2}$/;
 
@@ -15,5 +14,4 @@ const correoelectronico = (event, elemento) => {
 };
 
 export default correoelectronico;
-
 

@@ -13,7 +13,7 @@
             <!-- Campo del nombre completo -->
             <label for="nombres">Nombres:</label>
             <input type="text" id="nombres" autocomplete="off" placeholder="Ingresa tus nombres" required>
-            <span class="error-message" id="nombres-error" style="color: #e2696b;" ></span>
+            <span class="error-message" id="nombres-error" style="color: #bd0003;"></span>
             
             <!-- Campo de los apellidos -->
             <label for="apellidos">Apellidos:</label>
@@ -22,7 +22,7 @@
             
             <!-- Campo de ingresar el correo electrónico-->
             <label for="correo">Correo Electrónico:</label>
-            <input type="email" id="correo" autocomplete="off" placeholder="Ingresa tu correo Electrónico"required>
+            <input type="email" id="correo" autocomplete="off" placeholder="Ingresa tu correo Electrónico" required>
             <span class="error-message" id="correo-error" style="color: #bd0003;"></span>
             
             <!-- Campo del teléfono -->
@@ -37,7 +37,7 @@
             
             <!-- Campo de ingresar documento-->
             <label for="tipodocumento">Tipo de documento:</label>
-            <select id="tipodocumento">
+            <select id="tipodocumento" required>
                 <option value="0">Selecciona el tipo de documento...</option>
                 <option value="1">Cédula de ciudadanía</option>
                 <option value="2">Tarjeta de identidad</option>
@@ -48,14 +48,14 @@
             <!-- Campo de ingresar número de documento-->
             <label for="documento">Número de documento:</label>
             <input type="text" id="documento" autocomplete="off" placeholder="Ingresa número de documento" required>
-            <span class="error-message" id="documento-error" style="color: #bd0003;"></span>
+            <span class="error-message" id="documento-error" style="color: #f51317;"></span>
             
             <!-- Campo de aceptar políticas-->
             <div class="button__checkbox">
                 <input type="checkbox" id="politicas" required>
                 <label for="politicas">Acepta las políticas de uso</label>
             </div>
-            <span class="error-message" id="politicas-error" style="color: #bd0003;"></span>
+            <span class="error-message" id="politicas-error" style="color: #fc0105;"></span>
             
             <!-- Botón de enviar -->
             <button id="boton" type="submit">Enviar</button>

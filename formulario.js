@@ -1,7 +1,11 @@
-import correoelectronico from "../formulario/modulos/modulo correo.js";
-import { sololetras } from "../formulario/modulos/modulos_letras.js";
-import { solonumeros } from "../formulario/modulos/modulos_numeros.js";
-import {  validar, remover } from "../formulario/modulos/modulo_validacion.js"
+// importanciones
+
+import correoelectronico from "./modulos/modulo correo.js"
+import  sololetras  from "./modulos/modulos_letras.js";
+import  solonumeros  from "./modulos/modulos_numeros.js";
+import is_valid from "./modulos/modulo_valid.js";
+
+// variables 
 
 // Selecciona el primer formulario (<form>) en el documento HTML. Lo asigna a la variable $formulario
 const $formulario = document.querySelector("form");
@@ -18,18 +22,43 @@ const politicas = document.querySelector("#politicas");
 const boton = document.querySelector("#boton");
 
 //  Se añade un listener al formulario que llama a la función validar cuando se intenta enviar el formulario.
-$formulario.addEventListener("submit", validar);
+$formulario.addEventListener("submit", (event) => {
+    is_valid(event, "form [required]")
 
-// keydown -- cuando ecribo tecla por tecla
+    const data ={
+        nombres: nombres.value,
+        apellidos: apellidos.value,
+        telefono: telefono.value,
+        direccion: direccion.value,
+        tipodocumento: tipodocumento.value,
+        documento: documento.value,
+        correo: correo.value,
+
+    }
+    if (Response){
+        fetch("http://localhost:3000/user",{
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',}
+    } )
+    
+
+
+}});
+
+
+// keydown -- cuando ecribo tecla por tecla 
 // keypress -- cuando la presiono
-// keyup -- cuando la oprimo
+// keyup -- cuando la oprimo 
 
-// Se añade un listener para el evento keyup en cada uno de los campos. Cuando se suelta una tecla, se llama a la función remover para verificar el estado del campo.
-[nombres, apellidos, correo, telefono, direccion, documento].forEach(input => {
-    input.addEventListener("keyup", () => {
-        remover(input);
-    });
-});
+// // Se añade un listener para el evento keyup en cada uno de los campos. Cuando se suelta una tecla, se llama a la función remover para verificar el estado del campo.
+// [nombres, apellidos, correo, telefono, direccion, documento].forEach(input => {
+//     input.addEventListener("keyup", () => {
+//         remover(input);
+//     });
+// });
+
 
 // Manejar el cambio en el tipo de documento
 // Al cambiar el valor del tipo de documento, se verifica si es diferente de "0". Se actualiza el estado visual del campo según corresponda.
@@ -46,7 +75,6 @@ tipodocumento.addEventListener("change", () => {
 // Manejar el estado del botón de enviar según el checkbox
 addEventListener("DOMContentLoaded", (event) => {
     if(!politicas.checked) {
-        console.log(boton);
         boton.setAttribute("disabled", "");
     }
 });
@@ -54,33 +82,29 @@ addEventListener("DOMContentLoaded", (event) => {
 politicas.addEventListener("change", function (e) {
     if (e.target.checked) {
         boton.removeAttribute("disabled");
-    }
+    } 
 });
 
-const validar = (event) =>{
-    event.preventDefault
-}
 
+// Validaciones específicas
 
-// // Validaciones específicas
+// Validación del documento
+documento.addEventListener("keypress", solonumeros);
 
-// // Validación del documento
-// documento.addEventListener("keypress", solonumeros);
+// Validación del telefono
+telefono.addEventListener("keypress", solonumeros);
 
-// // Validación del telefono
-// telefono.addEventListener("keypress", solonumeros);
+// Validación del nombre 
+nombres.addEventListener("keypress", (event) => {
+    sololetras(event, nombres);
+});
 
-// // Validación del nombre
-// nombres.addEventListener("keypress", (event) => {
-//     sololetras(event, nombres);
-// });
+// Validación del apellido
+apellidos.addEventListener("keypress", (event) => {
+    sololetras(event, apellidos);
+});
 
-// // Validación del apellido
-// apellidos.addEventListener("keypress", (event) => {
-//     sololetras(event, apellidos);
-// });
-
-// // Validación del correo electrónico
-// correo.addEventListener("blur", (event) => {
-//     correoelectronico(event, correo);
-// });
+// Validación del correo electrónico
+correo.addEventListener("blur", (event) => {
+    correoelectronico(event, correo);
+});
