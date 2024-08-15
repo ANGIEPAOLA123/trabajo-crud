@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+    <!-- Formulario de validación -->
     <div class="contenedor_principal">
         <form class="form" novalidate>
+            <!-- Campo del nombre completo -->
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" autocomplete="off" placeholder="Ingresa tu nombre"required>
+            <input type="text" id="nombre" autocomplete="off" placeholder="Ingresa tus nombres" required>
+            
+            <!-- Botón de enviar -->
             <button id="boton" type="submit">Enviar</button>
         </form>
     </div>
-    <script src="formularionuevo.js" type="module"></script>
+    
+    <script src="formulario_nuevo.js" type="module"></script>
 </body>
 </html>
